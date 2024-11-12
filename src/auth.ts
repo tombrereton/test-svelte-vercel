@@ -1,3 +1,4 @@
+import { env } from "$env/dynamic/private";
 import { SvelteKitAuth, type DefaultSession } from "@auth/sveltekit";
 import Spotify from "@auth/sveltekit/providers/spotify";
 
@@ -13,10 +14,10 @@ declare module "@auth/sveltekit" {
   interface Session {
     // token: AccessToken;
     user: {
-      id: string;
+      // id: string;
       // email: string;
       // image: string;
-      // name: string;
+      name: string;
     } & DefaultSession["user"];
   }
 }
@@ -27,6 +28,8 @@ const spotifyScopes =
 export const { handle, signIn, signOut } = SvelteKitAuth({
   providers: [
     Spotify({
+      clientId: env.AUTH_SPOTIFY_ID,
+      clientSecret: env.AUTH_SPOTIFY_SECRET,
       authorization: `https://accounts.spotify.com/authorize?scope=${encodeURIComponent(spotifyScopes)}`,
     }),
   ],
@@ -45,7 +48,7 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
       return token;
     },
     session: async ({ session, token }) => {
-      session.user.id = token.id as string;
+      session.user.name = token.name as string;
       // session.token = {
       //   access_token: token.access_token as string,
       //   token_type: token.token_type as string,

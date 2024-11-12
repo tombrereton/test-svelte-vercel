@@ -17,7 +17,7 @@
       <a href="/playlists">Dashboard</a>
       <a href="/playlists/create">Create Playlist</a>
       <a href="/playlists/results">Results</a>
-      <p>{data.session?.user.id}</p>
+      <p>{data.session?.user.name}</p>
       {#if data.session}
         <button
           class="rounded border-2 border-black p-1"
