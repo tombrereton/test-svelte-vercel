@@ -26,6 +26,7 @@ const spotifyScopes =
   "user-read-email playlist-modify-private playlist-modify-public";
 
 export const { handle, signIn, signOut } = SvelteKitAuth({
+  debug: true,
   providers: [
     Spotify({
       clientId: env.AUTH_SPOTIFY_ID,
