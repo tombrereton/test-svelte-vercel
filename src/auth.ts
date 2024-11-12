@@ -27,6 +27,7 @@ const spotifyScopes =
 
 export const { handle, signIn, signOut } = SvelteKitAuth({
   debug: true,
+  trustHost: true,
   providers: [
     Spotify({
       clientId: env.AUTH_SPOTIFY_ID,
